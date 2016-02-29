@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>WDIQUIZ</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+
+<!--====== MAIN MENU / INDEX PAGE ======-->
+<script id="mainMenuTemplate" type="text/mustacheTemplate">
+        <header class="jumbotron hero-spacer">
+            <h1>Welcome to the 2016 official WDIConf Nice And Friendly Quiz!</h1>
+            <p>(Formerly known as the Torture Quiz)</p>
+            <p><a class="btn btn-primary btn-large">Start the quiz!</a>
+            </p>
+        </header>
+        <hr>
+        <div class="row">
+            <div class="col-lg-12">
+                <h3>Speakers</h3>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Yang</h3>
+                        <p>Binary Thinking and when to use it</p>
+                        <p>
+                            <a href="#quiz/6" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Mahendra</h3>
+                        <p>Google Maps API</p>
+                        <p>
+                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Josh S.</h3>
+                        <p>Lions and tigers and bears, oh my!</p>
+                        <p>
+                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>JB</h3>
+                        <p>Puppies and kittens</p>
+                        <p>
+                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row text-center">
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Luke</h3>
+                        <p>Five new technologies in 5 minutes</p>
+                        <p>
+                            <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Locky</h3>
+                        <p>Lions and tigers and bears, oh my</p>
+                        <p>
+                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>Swanny</h3>
+                        <p>The latest front end frameworks</p>
+                        <p>
+                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-sm-6 hero-feature">
+                <div class="thumbnail">
+                    <img src="http://placehold.it/800x500" alt="">
+                    <div class="caption">
+                        <h3>DT</h3>
+                        <p>We need to talk about cake</p>
+                        <p>
+                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+                <hr>
+        <footer>
+            <div class="row">
+                <div class="col-lg-12">
+                    <p>Copyright &copy; Your Website 2014</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+ </script>
+
+<!--====== QUIZ TITLE PAGE ======-->
+ <script id="quizTitlePageTemplate" type="text/mustacheTemplate">
+ <header class="jumbotron hero-spacer">
+            <h1>Quiz: We need to talk about Pudding</h1>
+            <p>and we need to talk about cake</p>
+            <p><a class="btn btn-primary btn-large" href="#quiz/6/question/21">Go!</a>
+            </p>
+        </header>
+ </script>
+
+<!--====== QUESTION PAGE ======-->
+<script id="quizQuestionTemplate" type="text/mustacheTemplate">
+<div class="container-fluid bg-info">
+    <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h3><span class="label label-warning" id="qid">2</span></h3>
+        </div>
+        <div class="modal-body">
+            <div class="col-xs-3 col-xs-offset-5">
+               <div id="loadbar" style="display: none;">
+                  <div class="blockG" id="rotateG_01"></div>
+                  <div class="blockG" id="rotateG_02"></div>
+                  <div class="blockG" id="rotateG_03"></div>
+                  <div class="blockG" id="rotateG_04"></div>
+                  <div class="blockG" id="rotateG_05"></div>
+                  <div class="blockG" id="rotateG_06"></div>
+                  <div class="blockG" id="rotateG_07"></div>
+                  <div class="blockG" id="rotateG_08"></div>
+              </div>
+          </div>
+
+          <div class="quiz" id="quiz" data-toggle="buttons">
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer1"></div><input type="radio" name="q_answer" value="1"></label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer2"></div><input type="radio" name="q_answer" value="2"></label>
+           <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer3"></div><input type="radio" name="q_answer" value="3"></label>
+           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer4"></div><input type="radio" name="q_answer" value="4"></label>
+       </div>
+   </div>
+   <div class="modal-footer text-muted">
+    <span id="answer"></span>
+</div>
+</div>
+</div>
+</div>
+ </script>   
+
+ 
+
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.js"></script>
+  <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+ <script src="questionAnimation.js"></script>
+ <script src="script.js"></script>
+ 
+    </body>
+</html>
