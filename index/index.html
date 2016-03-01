@@ -46,7 +46,7 @@
         <h3>{{ speaker }}</h3>
         <p>{{ title }}</p>
         <p>
-            <a href="#quiz/6" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+            <a href="#quiz/{{ id }}" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
         </p>
     </div>
 </div>
@@ -55,9 +55,9 @@
 <!--====== QUIZ TITLE PAGE ======-->
  <script id="quizTitlePageTemplate" type="text/mustacheTemplate">
  <header class="jumbotron hero-spacer">
-            <h1>Quiz: We need to talk about Pudding</h1>
-            <p>and we need to talk about cake</p>
-            <p><a class="btn btn-primary btn-large" href="#quiz/6/question/7">Go!</a>
+            <h1>{{ title }}</h1>
+            <p>{{ speaker }}</p>
+            <p><a id="nextQuestion" class="btn btn-primary btn-large" href="">Go!</a>
             </p>
         </header>
  </script>
@@ -68,7 +68,7 @@
     <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
-            <h3><span class="label label-warning" id="qid">2</span></h3>
+            <h3><span class="label label-warning" id="qid">{{ content }}</span></h3>
         </div>
         <div class="modal-body">
             <div class="col-xs-3 col-xs-offset-5">
@@ -85,10 +85,10 @@
           </div>
 
           <div class="quiz" id="quiz" data-toggle="buttons">
-           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer1"></div><input type="radio" name="q_answer" value="1"></label>
-           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer2"></div><input type="radio" name="q_answer" value="2"></label>
-           <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer3"></div><input type="radio" name="q_answer" value="3"></label>
-           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer4"></div><input type="radio" name="q_answer" value="4"></label>
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer1">{{ a }}</div><input type="radio" name="q_answer" value="1"></label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer2">{{ b }}</div><input type="radio" name="q_answer" value="2"></label>
+           <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer3">{{ c }}</div><input type="radio" name="q_answer" value="3"></label>
+           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span><div id="answer4">{{ d }}</div><input type="radio" name="q_answer" value="4"></label>
        </div>
    </div>
    <div class="modal-footer text-muted">

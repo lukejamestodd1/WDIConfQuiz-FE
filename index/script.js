@@ -49,7 +49,7 @@ var QuizTitlePageView = Backbone.View.extend({
   className: 'container',
   template: $('#quizTitlePageTemplate').html(),
   render: function() {
-    var html = Mustache.render(this.template);
+    var html = Mustache.render(this.template, this.model.toJSON());
 		this.$el.html(html);
 		return this;
   }
@@ -99,9 +99,9 @@ var Router = Backbone.Router.extend({
 	//=== ROUTES ===//
 	routes: {
 			"": "showIndex",
-			"quiz/:id": "showQuiz",
-			"quiz/:id/question/:id": "showQuestion",
-			"quiz/:id/results": "showResults",
+			"quiz/:qid": "showQuiz",
+			"quiz/:qid/question/:id": "showQuestion",
+			"quiz/:qid/results": "showResults",
 			"totals": "showTotals"
 	},
 
@@ -121,23 +121,46 @@ var Router = Backbone.Router.extend({
 	},
 
 	//=== QUIZ TITLE PAGE ===//for each quiz
-	showQuiz: function(){
+	showQuiz: function(qid){
 		setupBody();
-		console.log('HELLO');
-		var quizTitlePageView = new QuizTitlePageView();
-		$('body').append(quizTitlePageView.render().el);
+		var quiz = new Quiz({id: qid});
+		quiz.fetch().done(function(){
+			
+			var quizTitlePageView = new QuizTitlePageView({model: quiz});
+			$('body').append(quizTitlePageView.render().el);
+			
+			var questionsAll = new Questions();
+
+			questionsAll.fetch().done(function(questions){
+
+				var questions = questionsAll.where({quiz_id: parseInt(qid)});
+				console.log(questions[0]);
+
+				var url = "#quiz/" + qid + "/question/" + questions[0].get('id');
+				console.log(url);
+				$('#nextQuestion').attr("href", url);
+
+				_.each(questions, function(question){
+
+					//make a question view template for each Q
+					var questionTemplate = new QuestionPageView({model: question});
+					$('body').append(questionTemplate.render().el);
+
+					//hide other questions
+
+
+				});
+			});
+		});
 	},
 
 	//=== QUESTION PAGE ===//for each question
 	showQuestion: function(id){
 		setupBody();
-
 		question = new Question({id: id});
 		question.fetch().done(function(){
-
 			var questionPage = new QuestionPageView({model: question});
 			$('body').append(questionPage.render().el);
-
 			$('#qid').html(question.get('content'));
 			$('#answer1').html(question.get('a'));
 			$('#answer2').html(question.get('b'));
