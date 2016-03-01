@@ -85,15 +85,6 @@ var Router = Backbone.Router.extend({
 		var mainMenu = new MainMenuView();
 		$('body').append(mainMenu.render().el);
 		
-		for (var i = 1; i < nSpeakers; i++){
-			var quiz = new Questions({speaker_no: i});
-			quiz.fetch().done(function(){
-				quizArray.push(quiz);
-				console.log(quizArray[i-1]);
-			});
-		}
-
-
 	},
 
 	//=== QUIZ TITLE PAGE ===//for each quiz
