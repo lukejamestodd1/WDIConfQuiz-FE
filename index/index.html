@@ -21,108 +21,11 @@
         <hr>
         <div class="row">
             <div class="col-lg-12">
-                <h3>Speakers</h3>
+                <h3>Quizzes</h3>
             </div>
         </div>
-        <div class="row text-center">
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Yang</h3>
-                        <p>Binary Thinking and when to use it</p>
-                        <p>
-                            <a href="#quiz/6" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Mahendra</h3>
-                        <p>Google Maps API</p>
-                        <p>
-                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Josh S.</h3>
-                        <p>Lions and tigers and bears, oh my!</p>
-                        <p>
-                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>JB</h3>
-                        <p>Puppies and kittens</p>
-                        <p>
-                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="row text-center">
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Luke</h3>
-                        <p>Five new technologies in 5 minutes</p>
-                        <p>
-                            <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Locky</h3>
-                        <p>Lions and tigers and bears, oh my</p>
-                        <p>
-                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>Swanny</h3>
-                        <p>The latest front end frameworks</p>
-                        <p>
-                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3 col-sm-6 hero-feature">
-                <div class="thumbnail">
-                    <img src="http://placehold.it/800x500" alt="">
-                    <div class="caption">
-                        <h3>DT</h3>
-                        <p>We need to talk about cake</p>
-                        <p>
-                             <a href="#quiz/:id" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
+        <div class="row text-center" id="listArea">
+            
         </div>
                 <hr>
         <footer>
@@ -135,12 +38,26 @@
     </div>
  </script>
 
+<!--===== QUIZ MENU ITEM CARDS ======-->
+<script id="quizMenuItemTemplate" type="text/mustacheTemplate">
+<div class="thumbnail">
+    <img src="http://placehold.it/800x500" alt="">
+    <div class="caption">
+        <h3>{{ speaker }}</h3>
+        <p>{{ title }}</p>
+        <p>
+            <a href="#quiz/6" class="btn btn-primary">Take the Quiz!</a> <a href="#" class="btn btn-default">View Results</a>
+        </p>
+    </div>
+</div>
+</script>
+
 <!--====== QUIZ TITLE PAGE ======-->
  <script id="quizTitlePageTemplate" type="text/mustacheTemplate">
  <header class="jumbotron hero-spacer">
             <h1>Quiz: We need to talk about Pudding</h1>
             <p>and we need to talk about cake</p>
-            <p><a class="btn btn-primary btn-large" href="#quiz/6/question/21">Go!</a>
+            <p><a class="btn btn-primary btn-large" href="#quiz/6/question/7">Go!</a>
             </p>
         </header>
  </script>
@@ -185,10 +102,12 @@
  
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.js"></script>
+ <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
   <script src="https://code.jquery.com/jquery-2.2.0.min.js"></script>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+  
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
 
  <script src="questionAnimation.js"></script>

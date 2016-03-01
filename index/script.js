@@ -3,11 +3,29 @@ var Question = Backbone.Model.extend({
 	urlRoot: 'http://localhost:3000/api/questions'
 });
 
+var Quiz = Backbone.Model.extend({
+	urlRoot: 'http://localhost:3000/api/quizzes'
+});
+
+var User = Backbone.Model.extend({
+	urlRoot: 'http://localhost:3000/api/users'
+});
+
 
 //=============== COLLECTIONS ==============//
 var Questions = Backbone.Collection.extend({
 	model: Question,
 	url: 'http://localhost:3000/api/questions'
+});
+
+var Quizzes = Backbone.Model.extend({
+	model: Quiz,
+	urlRoot: 'http://localhost:3000/api/quizzes'
+});
+
+var Users = Backbone.Model.extend({
+	model: User,
+	urlRoot: 'http://localhost:3000/api/users'
 });
 
 
@@ -32,6 +50,18 @@ var QuizTitlePageView = Backbone.View.extend({
   template: $('#quizTitlePageTemplate').html(),
   render: function() {
     var html = Mustache.render(this.template);
+		this.$el.html(html);
+		return this;
+  }
+});
+
+//=== QUIZ MENU ITEM VIEW ===//
+var QuizItemTemplateView = Backbone.View.extend({
+  tagName: 'div',
+  className: 'col-md-3 col-sm-6 hero-feature',
+  template: $('#quizMenuItemTemplate').html(),
+  render: function() {
+    var html = Mustache.render(this.template, this.model);
 		this.$el.html(html);
 		return this;
   }
@@ -77,14 +107,17 @@ var Router = Backbone.Router.extend({
 
 	//=== INDEX/HOME PAGE ===//quiz main menu
 	showIndex: function(){
-		
-		var nSpeakers = 6;
-		var quizArray = [];
-
 		setupBody();
 		var mainMenu = new MainMenuView();
 		$('body').append(mainMenu.render().el);
-		
+
+		var quizzes = new Quizzes();
+		quizzes.fetch().done(function(quizzes){
+			_.each(quizzes, function(quiz){
+				var quizItemTemplate = new QuizItemTemplateView({ model: quiz});
+				$('#listArea').append(quizItemTemplate.render().el);
+			});
+		});	
 	},
 
 	//=== QUIZ TITLE PAGE ===//for each quiz
@@ -96,12 +129,10 @@ var Router = Backbone.Router.extend({
 	},
 
 	//=== QUESTION PAGE ===//for each question
-	showQuestion: function(){
+	showQuestion: function(id){
 		setupBody();
 
-		
-
-		question = new Question({id: 21});
+		question = new Question({id: id});
 		question.fetch().done(function(){
 
 			var questionPage = new QuestionPageView({model: question});
