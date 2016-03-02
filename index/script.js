@@ -110,9 +110,6 @@ var setupBody = function() {
 	});
 }
 
-
-
-
 //=========== ROUTER DECLARATION ===========//
 
 var Router = Backbone.Router.extend({
