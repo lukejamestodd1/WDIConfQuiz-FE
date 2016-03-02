@@ -1,4 +1,5 @@
 $(function(){
+    console.log("HEEEELLLOO")
     var loading = $('#loadbar').hide();
     $(document)
     .ajaxStart(function () {
@@ -8,6 +9,7 @@ $(function(){
     });
     
     $("label.btn").on('click',function () {
+        console.log('HELLO');
     	var choice = $(this).find('input:radio').val();
     	$('#loadbar').show();
     	$('#quiz').fadeOut();
@@ -19,12 +21,16 @@ $(function(){
     	}, 1500);
     });
 
-    $ans = 3;
+    $ans = 3 //question.get('answer');
 
     $.fn.checking = function(ck) {
-        if (ck != $ans)
+        if (ck != $ans){
+            console.log('INCORRECT');
             return 'INCORRECT';
-        else 
+        }
+        else {
+            console.log('CORRECT');
             return 'CORRECT';
+        }
     }; 
 });	

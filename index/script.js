@@ -60,6 +60,9 @@ var QuizItemTemplateView = Backbone.View.extend({
   tagName: 'div',
   className: 'col-md-3 col-sm-6 hero-feature',
   template: $('#quizMenuItemTemplate').html(),
+
+  //if logged in display buttons etc....
+
   render: function() {
     var html = Mustache.render(this.template, this.model);
 		this.$el.html(html);
@@ -72,13 +75,31 @@ var QuestionPageView = Backbone.View.extend({
   tagName: 'div',
   className: 'container',
   template: $('#quizQuestionTemplate').html(),
+
+  events: {
+  	// 'click label.btn': 'abc',
+  	'click .quiz label': 'abc'
+  },
+
+	abc: function (event) {
+				//get question info
+				var selectedAnswer = $(event.target).closest('.btn').find('#answer').html();
+				
+				console.log(selectedAnswer);
+				//check answer
+				if (selectedAnswer == this.model.get('answer'))
+					console.log('CORRECT');
+				else
+					console.log('INCORRECT');
+				//if correct update user score
+		},
+
   render: function() {
     var html = Mustache.render(this.template, this.model.toJSON());
 		this.$el.html(html);
-		return this;
-  }
+		return this; 
+  },
 });
-
 
 //========== SETUP PAGE FUNCTIONS ==========//
 
@@ -134,39 +155,39 @@ var Router = Backbone.Router.extend({
 			questionsAll.fetch().done(function(questions){
 
 				var questions = questionsAll.where({quiz_id: parseInt(qid)});
-				console.log(questions[0]);
+				//console.log(questions[0]);
 
-				var url = "#quiz/" + qid + "/question/" + questions[0].get('id');
-				console.log(url);
-				$('#nextQuestion').attr("href", url);
+				// var url = "#quiz/" + qid + "/question/" + questions[0].get('id');
+				// console.log(url);
+				// $('#nextQuestion').attr("href", url);
 
 				_.each(questions, function(question){
-
+					// console.log(question);
 					//make a question view template for each Q
 					var questionTemplate = new QuestionPageView({model: question});
 					$('body').append(questionTemplate.render().el);
 
 					//hide other questions
-
-
 				});
+
+
 			});
 		});
 	},
 
 	//=== QUESTION PAGE ===//for each question
 	showQuestion: function(id){
-		setupBody();
-		question = new Question({id: id});
-		question.fetch().done(function(){
-			var questionPage = new QuestionPageView({model: question});
-			$('body').append(questionPage.render().el);
-			$('#qid').html(question.get('content'));
-			$('#answer1').html(question.get('a'));
-			$('#answer2').html(question.get('b'));
-			$('#answer3').html(question.get('c'));
-			$('#answer4').html(question.get('d'));
-		});
+		// setupBody();
+		// question = new Question({id: id});
+		// question.fetch().done(function(){
+		// 	var questionPage = new QuestionPageView({model: question});
+		// 	$('body').append(questionPage.render().el);
+		// 	$('#qid').html(question.get('content'));
+		// 	$('#answer1').html(question.get('a'));
+		// 	$('#answer2').html(question.get('b'));
+		// 	$('#answer3').html(question.get('c'));
+		// 	$('#answer4').html(question.get('d'));
+		// });
 	},
 
 	//=== RESULTS PAGE ===//after each quiz

@@ -1,4 +1,5 @@
 (function(){
+	console.log('CHART');
 	"use strict";
 
 	var root = this,
