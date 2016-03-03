@@ -24,6 +24,7 @@ window.onload = function(){
 			console.log(user.name);
 			namesArray.push(user.name);
 			console.log(user.score);
+			//CHANGE THIS WHEN REAL SCORES ARE AVAILABLE
 			scoresArray.push(user.score + randomScalingFactor());
 		});
 		
@@ -50,9 +51,8 @@ window.onload = function(){
 
 	}
 
-
 		var ctx = document.getElementById("canvas").getContext("2d");
-	window.myBar = new Chart(ctx).Bar(barChartData, {
+		window.myBar = new Chart(ctx).Bar(barChartData, {
 		responsive : true
 	});
 

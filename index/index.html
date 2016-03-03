@@ -13,16 +13,11 @@
 <!--====== MAIN MENU / INDEX PAGE ======-->
 <script id="mainMenuTemplate" type="text/mustacheTemplate">
         <header class="jumbotron hero-spacer">
-            <h1>Welcome to the 2016 official WDIConf Nice And Friendly Quiz!</h1>
-            <p>(Formerly known as the Torture Quiz)</p>
-            <p><a class="btn btn-primary btn-large">Start the quiz!</a>
-            </p>
+            <h1 id="headerText">Welcome to the 2016 official WDIConf Nice And Friendly Quiz!</h1>
+            <p id="subheaderText">(Formerly known as the Torture Quiz)</p>
         </header>
         <hr>
         <div class="row">
-            <div class="col-lg-12">
-                <h3>Quizzes</h3>
-            </div>
         </div>
         <div class="row text-center" id="listArea">
             
@@ -31,7 +26,7 @@
         <footer>
             <div class="row">
                 <div class="col-lg-12">
-                    <p>Copyright &copy; Your Website 2014</p>
+                    <p>Copyright &copy; YangJoshLuke 2016</p>
                 </div>
             </div>
         </footer>
@@ -52,12 +47,12 @@
 </div>
 </script>
 
-<!--====== QUIZ TITLE PAGE ======-->
+<!--====== QUIZ PAGE ======-->
  <script id="quizTitlePageTemplate" type="text/mustacheTemplate">
  <header class="jumbotron hero-spacer">
             <h1>{{ title }}</h1>
             <p>{{ speaker }}</p>
-            <p><a id="nextQuestion" class="btn btn-primary btn-large" href="">Go!</a>
+            <p><a id="nextQuestion" class="btn btn-primary btn-large" href="#totals">Submit answers</a>
             </p>
         </header>
  </script>
@@ -99,7 +94,12 @@
 </div>
  </script>   
 
- 
+<!--====== TOTALS CANVAS FOR GRAPH ======-->
+<script id="totalsTemplate" type="text/mustacheTemplate">
+    <div style="width: 85%">
+        <canvas id="canvas" height="450" width="600"></canvas>
+    </div>
+ </script>
 
  <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.2.1/mustache.js"></script>
 
@@ -112,6 +112,9 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.2.3/backbone-min.js"></script>
   
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.2/Chart.js"></script>
+<script src="Chart.Bar.js"></script>
 
 <script src="script.js"></script>
  <script src="questionAnimation.js"></script>
