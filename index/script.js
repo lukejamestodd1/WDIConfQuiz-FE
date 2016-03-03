@@ -18,14 +18,14 @@ var Questions = Backbone.Collection.extend({
 	url: 'http://localhost:3000/api/questions'
 });
 
-var Quizzes = Backbone.Model.extend({
+var Quizzes = Backbone.Collection.extend({
 	model: Quiz,
-	urlRoot: 'http://localhost:3000/api/quizzes'
+	url: 'http://localhost:3000/api/quizzes'
 });
 
-var Users = Backbone.Model.extend({
+var Users = Backbone.Collection.extend({
 	model: User,
-	urlRoot: 'http://localhost:3000/api/users'
+	url: 'http://localhost:3000/api/users'
 });
 
 
@@ -48,11 +48,34 @@ var QuizTitlePageView = Backbone.View.extend({
   tagName: 'div',
   className: 'container',
   template: $('#quizTitlePageTemplate').html(),
+  
+  //change user score info when click Submit
+  events: {
+  	'click #submitAnswers' : 'saveScore'
+  },
+
+  saveScore: function(event){
+  	var allUsers = new Users();
+  	allUsers.fetch().done(function(allUsers){
+			console.log('%%%%%%%%%%%');
+		
+			var currentUser = allUsers.find({id: 3});
+			currentUser.fetch().done(function(currentUser){
+				console.log('!!!!!!!!!!!!!!!');
+				console.log(currentUser);
+			});
+
+		});
+  	
+	},
+
   render: function() {
     var html = Mustache.render(this.template, this.model.toJSON());
 		this.$el.html(html);
 		return this;
   }
+
+
 });
 
 //=== QUIZ MENU ITEM VIEW ===//
@@ -69,6 +92,8 @@ var QuizItemTemplateView = Backbone.View.extend({
 		return this;
   }
 });
+
+
 
 //=== QUIZ QUESTION VIEW ===//
 var QuestionPageView = Backbone.View.extend({
@@ -160,12 +185,11 @@ var Router = Backbone.Router.extend({
 		setupBody();
 		var quiz = new Quiz({id: qid});
 		quiz.fetch().done(function(){
-			
+			console.log(quiz);
 			var quizTitlePageView = new QuizTitlePageView({model: quiz});
 			$('body').append(quizTitlePageView.render().el);
 			
 			var questionsAll = new Questions();
-
 			questionsAll.fetch().done(function(questions){
 
 				var questions = questionsAll.where({quiz_id: parseInt(qid)});
@@ -176,8 +200,8 @@ var Router = Backbone.Router.extend({
 					var questionTemplate = new QuestionPageView({model: question});
 					$('body').append(questionTemplate.render().el);
 
-					//hide other questions
-					
+					//hide other questions - do this later
+
 				});
 			});
 		});
@@ -254,5 +278,31 @@ $(document).ready( function() {
 
 
 
+//===== AJAX CALL FOR CHANGING USER SCORE =====//
 
+
+
+
+
+
+
+	
+
+
+
+	//USERSCORE = CURRENT USER.SCORE
+	// var userScore = $(this).closest('.ui-card').data('id')
+
+	// var options = {
+	// 	url: 'http://localhost:3000/api/users/'+id,
+	// 	method: 'post',
+	// 	dataType: 'json'
+	// };
+
+	// var $counter = $(this).closest('.ui-card').find('.counter');
+	
+	// //NEW LIKE CREATED
+	// $.ajax(options).done(function(data){
+	// 	$counter.html(data.count)
+	// });
 
