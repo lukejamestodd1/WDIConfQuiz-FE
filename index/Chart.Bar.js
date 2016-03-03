@@ -12,7 +12,7 @@
 		scaleBeginAtZero : true,
 
 		//Boolean - Whether grid lines are shown across the chart
-		scaleShowGridLines : true,
+		scaleShowGridLines : false,
 
 		//String - Colour of the grid lines
 		scaleGridLineColor : "rgba(0,0,0,.05)",

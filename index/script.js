@@ -77,7 +77,6 @@ var QuestionPageView = Backbone.View.extend({
   template: $('#quizQuestionTemplate').html(),
 
   events: {
-  	// 'click label.btn': 'abc',
   	'click .quiz label': 'abc'
   },
 
@@ -101,13 +100,13 @@ var QuestionPageView = Backbone.View.extend({
   },
 });
 
+
 //=== CHART TOTALS VIEW ===//
 var ChartTotalsView = Backbone.View.extend({
   tagName: 'div',
   template: $('#totalsTemplate').html(),
   
-
-
+  //move logic from routes function to here
 
   render: function() {
     var html = Mustache.render(this.template);
@@ -170,12 +169,7 @@ var Router = Backbone.Router.extend({
 			questionsAll.fetch().done(function(questions){
 
 				var questions = questionsAll.where({quiz_id: parseInt(qid)});
-				//console.log(questions[0]);
-
-				// var url = "#quiz/" + qid + "/question/" + questions[0].get('id');
-				// console.log(url);
-				// $('#nextQuestion').attr("href", url);
-
+				
 				_.each(questions, function(question){
 					// console.log(question);
 					//make a question view template for each Q
@@ -183,33 +177,20 @@ var Router = Backbone.Router.extend({
 					$('body').append(questionTemplate.render().el);
 
 					//hide other questions
+					
 				});
-
-
 			});
 		});
 	},
 
 	//=== QUESTION PAGE ===//for each question
 	showQuestion: function(id){
-		// setupBody();
-		// question = new Question({id: id});
-		// question.fetch().done(function(){
-		// 	var questionPage = new QuestionPageView({model: question});
-		// 	$('body').append(questionPage.render().el);
-		// 	$('#qid').html(question.get('content'));
-		// 	$('#answer1').html(question.get('a'));
-		// 	$('#answer2').html(question.get('b'));
-		// 	$('#answer3').html(question.get('c'));
-		// 	$('#answer4').html(question.get('d'));
-		// });
+		//not used: showing all questions on same page atm
 	},
 
 	//=== RESULTS PAGE ===//after each quiz
 	showResults: function(){
-		
-
-
+		//not used: only showing totals atm
 	},
 
 	//=== TOTALS PAGE ===//end of quiz
@@ -224,60 +205,43 @@ var Router = Backbone.Router.extend({
 		var chartTotalsView = new ChartTotalsView();
 		$('#listArea').append(chartTotalsView.render().el);
 
-		//to give a random score
-var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
+		//to give a random score - CHANGE WHEN HAVE DATA
+		var randomScalingFactor = function(){ return Math.round(Math.random()*100)};
 
 		var namesArray = []
-	var scoresArray = []
-	var users = new Users();
+		var scoresArray = []
+		var users = new Users();
 
-	users.fetch().done(function(users){
-		
-		_.each(users, function(user){
-			console.log(user.name);
-			namesArray.push(user.name);
-			console.log(user.score);
-			//CHANGE THIS WHEN REAL SCORES ARE AVAILABLE
-			scoresArray.push(user.score + randomScalingFactor());
-		});
-		
-		console.log(namesArray);
+		users.fetch().done(function(users){
+			
+			_.each(users, function(user){
+				console.log(user.name);
+				namesArray.push(user.name);
+				console.log(user.score);
+				//CHANGE THIS WHEN REAL SCORES ARE AVAILABLE
+				scoresArray.push(user.score + randomScalingFactor());
+			});
+			
+			console.log(namesArray);
 
-		var barChartData = {
-		labels : namesArray,
-		datasets : [
-			// {
-			// 	fillColor : "rgba(220,220,220,0.5)",
-			// 	strokeColor : "rgba(220,220,220,0.8)",
-			// 	highlightFill: "rgba(220,220,220,0.75)",
-			// 	highlightStroke: "rgba(220,220,220,1)",
-			// 	data : [randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor(),randomScalingFactor()]
-			// },
-			{
-				fillColor : "rgba(151,187,205,0.5)",
-				strokeColor : "rgba(151,187,205,0.8)",
-				highlightFill : "rgba(151,187,205,0.75)",
-				highlightStroke : "rgba(151,187,205,1)",
-				data : scoresArray
+			var barChartData = {
+				labels : namesArray,
+				datasets : [
+					{
+						fillColor : "rgba(151,187,205,0.5)",
+						strokeColor : "rgba(151,187,205,0.8)",
+						highlightFill : "rgba(151,187,205,0.75)",
+						highlightStroke : "rgba(151,187,205,1)",
+						data : scoresArray
+					}
+				]
 			}
-		]
 
-	}
-
-		var ctx = document.getElementById("canvas").getContext("2d");
-		window.myBar = new Chart(ctx).Bar(barChartData, {
-		responsive : true
-	});
-
-
-
-
-	});
-
-
-
-
-
+			var ctx = document.getElementById("canvas").getContext("2d");
+			window.myBar = new Chart(ctx).Bar(barChartData, {
+				responsive : true
+			});
+		});
 	}
 });
 
